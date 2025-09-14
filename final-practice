@@ -1,1 +1,128 @@
-//start here
+/*Values, Data Types, and Operations:
+Asking the User to name their focus friend and returning what they name their friend*/
+
+const input = require("readline-sync"); 
+//allows the user to interact with the code. Value is constant and cannot be changed
+
+let focusFriendName = input.question("What would you like to name your Focus Friend?"); 
+/*using the input.question method to prompt the user to input a name, 
+will return a string if variable is logged to the console. 
+Utilized camelCase when naming variables.*/
+
+console.log("Your focus friend's name is: " + focusFriendName); 
+//the (+) concatenates the string to the variable(users input) and returns it as a string.
+
+
+
+/*Stringing Characters Together:
+Checking to make sure the users email includes a '@' and ends with '.com'*/
+
+let userEmail = "users@email.net";
+//the users email we are checking
+
+console.log('User email is: ' + userEmail);
+//logs user email to the console
+
+console.log("Email includes an @: " + userEmail.includes('@'));
+/*using the .includes method to see if the userEmail has an '@' anywhere in the string. Will return a boolean true.
+implicit conversion will automatically convert the boolean to a string since its concatenated with a string. */
+
+console.log(userEmail.endsWith('.com'));
+//using .endsWith method to check if the end of userEmail contains the characters '.com'. Returns boolean false.
+
+
+
+/*Control Structures and Logic:
+Asking the user to enter an email. If the email doesn't contain an '@', then asks the user to enter a valid email.
+If the email contains an '@', then asks user to input a password. If password does not have 8 characters,
+then ask the user to make sure password is 8 characters long. If password if 8 charcaters long, then user has 
+completed making their account*/
+
+userEmail = input.question("Please enter an email address.");
+//prompts the user to input their email
+
+if (!userEmail.includes('@') || !userEmail.endsWith('.com')) {
+    /*the ! in front of the userEmail is the 'not' symbol and the || means 'or'. 
+    If the users input DOES NOT include an '@' OR ends with '.com' THEN...*/
+    console.log("Not a valid Email."); //returns not a valid email
+    let emailAttempt2 = input.question("Please enter a valid email");
+    //allows the user a second attempt at inputting an email
+    if (emailAttempt2.includes('@') && emailAttempt2.endsWith('.com')) {
+    //&& means AND. So if the second attempt includes '@' AND had '.com' at the end, THEN...
+        console.log("Great. Thank you"); //returns great. thank you and moves on to ask for a password.
+    } 
+} else if (userEmail.includes('@') && userEmail.endsWith('.com'))
+    //if the user inputs an email that meets both of the conditions on the first entry.
+    console.log("Great. Thank you.");
+
+let userPassword = input.question("Please enter a password");
+//allows the user to input a password only if they have entered an email.
+    if (userPassword.length < 8) { 
+    /* uses the length method to check the length of the password. If the password is less than 8 characters
+    then it prompts the user to try again.*/
+        console.log("Password must be at least 8 characters long.");
+        let passwordAttempt2 = input.question("Please enter a password with at least 8 characters.")
+        //user inputs another password attempt
+        if (passwordAttempt2.length >= 8) { 
+        // if the second password attempts length is greater than or equal to 8, then their account it set up!
+            console.log("Thank you for setting up your account!");
+    }
+} else if (userPassword.length >= 8) {
+//if the user meets the conditions on the first attempt
+    console.log("Thank you for setting up your account!"); //returns this once inputing a valid email and password
+}
+
+
+
+/*Building Arrays:
+Creating a task list that has 5 empty slots, then clearing the list of all contents*/
+
+let toDoList = [];
+//using an array literal to create an array that is completely empty
+
+console.log(toDoList);
+//Logging the the toDoList to the console to show that the array is empty
+
+
+
+/*Using Arrays:
+Adding 3 items to the end of the list, adding 2 items to the beginning of the list, removing the last item of the list*/
+
+toDoList.push('Eat Sweet Treats','Play Games','Hang with Friends');
+//the push method adds items to the end of the toDoList
+console.log(toDoList);
+//shows the user the items in the list
+
+let newLength = toDoList.unshift('Finish Launch Code Final','Practice Programming');
+/*assigning a new variable and using the unshift method to add items to the beginning of the list, 
+so these tasks will be listed before the 3 taks added earlier*/
+
+console.log("There are now " + newLength + " items in your To Do List.");
+//returns how many items are now in the existing to-do list
+
+toDoList.pop();
+//the pop method removes the very last iem from the list
+console.log(toDoList);
+/*returns only the remaining 4 items in the list, if the pop method was assigned to a variable,
+it would return the last item that was removed if logged to the console.*/
+
+
+
+/*Creating and Using Objects:
+Creating a user profile, adding a variable to the profile, and accessing certain elements in the profile*/
+
+let userProfile = { //uses object literals to create a userProfile with 3 keys: name, email, and password
+    name : "Faith",
+    email : userEmail, //userName key references the userEmail variable that the user input earlier in the code
+    password : userPassword //password key references the userPassword variable the use input earlier in the code
+};
+console.log(userProfile); 
+//logs the entire user profile; all the keys and their values
+
+userProfile.friendName = focusFriendName; 
+//uses dot notation to add the key friendName and references the focusFriendName variable that the user input earlier.
+
+console.log(userProfile);
+//logs the the entire user profile including the key we just added
+console.log("The users name is: " + userProfile.name);
+//only logs the name key using dot notation
